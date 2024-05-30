@@ -12,6 +12,6 @@ namespace lw {
     CmdPool(const Device &device);
     ~CmdPool(void);
     const vk::CommandPool &get(void) const { return m_cmdPool; }
-    CmdBuf alloc(CmdBufType type) { return CmdBuf(c_device, *this, type); }
+    CmdBuf alloc(CmdBufType type) { return CmdBuf{c_device, *this, type}; }
   };
 }

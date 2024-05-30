@@ -3,13 +3,10 @@
 
 namespace lw {
   PhysicalDevice::PhysicalDevice(const Instance &instance) {
-    std::vector<vk::PhysicalDevice> physical_devices = instance.get().enumeratePhysicalDevices();
-    if (physical_devices.empty()) {
-      std::cerr << "lw::PhysicalDevice -> no available devices" << std::endl;
-      exit(1);
-    }
+    std::vector<vk::PhysicalDevice> physical_devices { instance.get().enumeratePhysicalDevices() };
+    if (physical_devices.empty()) throw std::runtime_error{"lw::PhysicalDevice -> no available devices"};
     for (const auto &pd : physical_devices) {
-      vk::PhysicalDeviceProperties props = pd.getProperties();
+      vk::PhysicalDeviceProperties props { pd.getProperties() };
       if (props.deviceType == vk::PhysicalDeviceType::eDiscreteGpu) {
         m_physicalDevice = pd;
         break;
