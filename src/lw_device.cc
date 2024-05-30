@@ -11,7 +11,7 @@ static auto enumerate(const auto &es) {
 
 namespace lw {
   Device::Device(const Instance &instance) : m_physicalDevice(instance) {
-    std::vector<vk::QueueFamilyProperties> queue_family_props = m_physicalDevice.getPhysicalDevice().getQueueFamilyProperties();
+    std::vector<vk::QueueFamilyProperties> queue_family_props = m_physicalDevice.get().getQueueFamilyProperties();
     float queue_priority = 0;
     for (const auto &[i, qfp] : enumerate(queue_family_props)) {
       if (qfp.queueFlags & vk::QueueFlagBits::eGraphics) {
@@ -25,7 +25,7 @@ namespace lw {
                                               &queue_priority);
     vk::DeviceCreateInfo device_ci(vk::DeviceCreateFlags(), device_queue_ci);
     try {
-      m_device = m_physicalDevice.getPhysicalDevice().createDevice(device_ci);
+      m_device = m_physicalDevice.get().createDevice(device_ci);
     }
     catch (vk::SystemError &err) {
       std::cerr << "lw::Device -> " << err.what() << std::endl;

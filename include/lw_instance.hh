@@ -8,6 +8,6 @@ namespace lw {
   public:
     Instance(void);
     ~Instance(void);
-    const vk::Instance &getInstance(void) const { return m_instance; }
+    const vk::Instance &get(void) const { return m_instance; }
   };
 }

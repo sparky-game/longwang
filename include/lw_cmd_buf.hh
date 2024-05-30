@@ -18,7 +18,7 @@ namespace lw {
     vk::CommandBuffer m_cmdBuf;
   public:
     CmdBuf(const Device &device, const CmdPool &cmd_pool, CmdBufType type);
+    const vk::CommandBuffer &get(void) const { return m_cmdBuf; }
     const CmdBufType &getType(void) const { return c_type; }
-    const vk::CommandBuffer &getCmdBuf(void) const { return m_cmdBuf; }
   };
 }

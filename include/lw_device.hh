@@ -11,6 +11,6 @@ namespace lw {
     Device(const Instance &instance);
     ~Device(void);
     const PhysicalDevice &getPhysicalDevice(void) const { return m_physicalDevice; }
-    const vk::Device &getDevice(void) const { return m_device; }
+    const vk::Device &get(void) const { return m_device; }
   };
 }

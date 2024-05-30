@@ -3,7 +3,7 @@
 
 namespace lw {
   PhysicalDevice::PhysicalDevice(const Instance &instance) {
-    std::vector<vk::PhysicalDevice> physical_devices = instance.getInstance().enumeratePhysicalDevices();
+    std::vector<vk::PhysicalDevice> physical_devices = instance.get().enumeratePhysicalDevices();
     if (physical_devices.empty()) {
       std::cerr << "lw::PhysicalDevice -> no available devices" << std::endl;
       exit(1);
