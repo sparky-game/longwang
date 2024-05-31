@@ -1,4 +1,48 @@
 #+AUTHOR: Wasym A. Alonso
 
 # Logo & Title
-#+TITLE: Longwang (龍王)
+#+begin_html
+<h1 align="center">
+<img src="assets/logo.png" alt="Longwang Logo">
+<br/>
+Longwang (龍王)
+</h1>
+#+end_html
+
+# Subtitle
+#+begin_html
+<h4 align="center">
+Vulkan RaaL (Renderer as a Library)
+</h4>
+#+end_html
+
+# Repository marketing badges
+#+begin_html
+<p align="center">
+<a href="https://www.buymeacoffee.com/iwas.coder">
+<img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height=41>
+</a>
+</p>
+#+end_html
+
+# Repository info badges
+#+begin_html
+<p align="center">
+<img src="https://img.shields.io/github/license/sparky-game/longwang?color=blue" alt="License">
+<img src="https://img.shields.io/badge/C++-20-blue" alt="C++ Standard">
+<img src="https://img.shields.io/github/repo-size/sparky-game/longwang?color=blue" alt="Size">
+<img src="https://img.shields.io/github/v/tag/sparky-game/longwang?color=blue" alt="Release">
+<img src="https://img.shields.io/badge/speed-%F0%9F%94%A5blazing-blue" alt="Blazing Speed">
+</p>
+#+end_html
+
+(...)
+
+# BSD-3-Clause License notice
+#+begin_quote
+Longwang is free software: you can redistribute it and/or modify it under the terms of the BSD 3-Clause "New" or "Revised" License as published by The Regents of the University of California. @@html:<br>@@
+Longwang is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the BSD 3-Clause "New" or "Revised" License for more details. @@html:<br>@@
+You should have received a copy of the BSD 3-Clause "New" or "Revised" License along with Longwang. If not, see <https://opensource.org/license/BSD-3-Clause>.
+#+end_quote
+
+* Table of Contents :toc:
