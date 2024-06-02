@@ -21,28 +21,27 @@
 
 #include <iostream>
 #include <lw_instance.hh>
+#include <lw_platform.hh>
 
 static constexpr auto app_name { "Test" };
 static constexpr auto app_version { VK_MAKE_VERSION(0, 1, 0) };
 static constexpr auto engine_name { "Longwang" };
 static constexpr auto engine_version { VK_MAKE_VERSION(0, 1, 0) };
 static constexpr auto api_version { VK_API_VERSION_1_3 };
-static constexpr const char *extensions[] {{ VK_KHR_SURFACE_EXTENSION_NAME }};
-static constexpr auto extension_count { sizeof(extensions) / sizeof(extensions[0]) };
 #ifndef NDEBUG
-static constexpr const char *debug_layers[] {{ "VK_LAYER_KHRONOS_validation" }};
-static constexpr auto debug_layer_count { sizeof(debug_layers) / sizeof(debug_layers[0]) };
+static constexpr const char *layers[] {{ "VK_LAYER_KHRONOS_validation" }};
+static constexpr auto layer_count { sizeof(layers) / sizeof(layers[0]) };
 #endif
 
 namespace lw {
   Instance::Instance(void) {
     vk::ApplicationInfo app_i { app_name, app_version, engine_name, engine_version, api_version };
-    vk::InstanceCreateInfo instance_ci { {}, &app_i };
-    instance_ci.ppEnabledExtensionNames = extensions;
-    instance_ci.enabledExtensionCount = extension_count;
+    m_extensions.push_back("VK_KHR_surface");
+    platform_get_required_extensions(m_extensions);
+    vk::InstanceCreateInfo instance_ci { {}, &app_i, {}, {}, static_cast<uint32_t>(m_extensions.size()), &m_extensions[0] };
 #ifndef NDEBUG
-    instance_ci.ppEnabledLayerNames = debug_layers;
-    instance_ci.enabledLayerCount = debug_layer_count;
+    instance_ci.enabledLayerCount = layer_count;
+    instance_ci.ppEnabledLayerNames = layers;
 #endif
     try {
       m_instance = vk::createInstance(instance_ci);

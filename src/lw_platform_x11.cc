@@ -35,8 +35,8 @@ static constexpr std::string window_name { "Test" };
 static constexpr std::string wm_protocols_prop_id { "WM_PROTOCOLS" };
 static const std::string wm_delete_protocol_id { "WM_DELETE_WINDOW" };
 
-static xcb_connection_t *connection = 0;
-static xcb_window_t window = {0};
+xcb_connection_t *connection = 0;
+xcb_window_t window = {0};
 
 static inline void window_set_title(void) {
   xcb_change_property(connection,
@@ -113,6 +113,10 @@ namespace lw {
   void platform_destroy_window(void) {
     xcb_destroy_window(connection, window);
     std::cout << "lw::platform_destroy_window() :: destroyed successfully" << std::endl;
+  }
+
+  void platform_get_required_extensions(std::vector<const char *> &extensions) {
+    extensions.push_back("VK_KHR_xcb_surface");
   }
 }
 

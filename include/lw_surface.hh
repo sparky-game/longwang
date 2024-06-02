@@ -19,24 +19,18 @@
  */
 
 
-#include <iostream>
-#include <lw_cmd_pool.hh>
+#pragma once
+
+#include <lw_instance.hh>
+#include <vulkan/vulkan.hpp>
 
 namespace lw {
-  CmdPool::CmdPool(const Device &device) : c_device{device} {
-    vk::CommandPoolCreateInfo command_pool_ci { {}, c_device.getPhysicalDevice().getGraphicsIndex() };
-    try {
-      m_cmdPool = c_device.get().createCommandPool(command_pool_ci);
-    }
-    catch (vk::SystemError &err) {
-      std::cerr << "lw::CmdPool -> " << err.what() << std::endl;
-      throw err;
-    }
-    std::cout << "lw::CmdPool :: created successfully" << std::endl;
-  }
-
-  CmdPool::~CmdPool(void) {
-    c_device.get().destroyCommandPool(m_cmdPool);
-    std::cout << "lw::~CmdPool :: destroyed successfully" << std::endl;
-  }
+  class Surface {
+    const Instance &c_instance;
+    vk::SurfaceKHR m_surface;
+  public:
+    Surface(const Instance &instance);
+    ~Surface(void);
+    const vk::SurfaceKHR &get(void) const { return m_surface; }
+  };
 }

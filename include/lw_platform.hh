@@ -21,7 +21,11 @@
 
 #pragma once
 
+#include <tuple>
+#include <vector>
+
 namespace lw {
   void platform_create_window(void);
   void platform_destroy_window(void);
+  void platform_get_required_extensions(std::vector<const char *> &extensions);
 }

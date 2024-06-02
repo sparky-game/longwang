@@ -26,6 +26,7 @@
 namespace lw {
   class Instance {
     vk::Instance m_instance;
+    std::vector<const char *> m_extensions;
   public:
     Instance(void);
     ~Instance(void);

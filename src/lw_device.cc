@@ -40,11 +40,8 @@ namespace lw {
         break;
       }
     }
-    vk::DeviceQueueCreateInfo device_queue_ci{vk::DeviceQueueCreateFlags(),
-                                              m_physicalDevice.getGraphicsIndex(),
-                                              1,
-                                              &queue_priority};
-    vk::DeviceCreateInfo device_ci { vk::DeviceCreateFlags(), device_queue_ci };
+    vk::DeviceQueueCreateInfo device_queue_ci{ {}, m_physicalDevice.getGraphicsIndex(), 1, &queue_priority };
+    vk::DeviceCreateInfo device_ci { {}, device_queue_ci };
     try {
       m_device = m_physicalDevice.get().createDevice(device_ci);
     }

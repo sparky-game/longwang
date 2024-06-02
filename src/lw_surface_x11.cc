@@ -19,24 +19,38 @@
  */
 
 
+#ifdef __unix__
+
+#define VK_USE_PLATFORM_XCB_KHR
+
+#include <tuple>
 #include <iostream>
-#include <lw_cmd_pool.hh>
+#include <xcb/xcb.h>
+#include <lw_surface.hh>
+#include <lw_platform.hh>
+
+extern xcb_connection_t *connection;
+extern xcb_window_t window;
 
 namespace lw {
-  CmdPool::CmdPool(const Device &device) : c_device{device} {
-    vk::CommandPoolCreateInfo command_pool_ci { {}, c_device.getPhysicalDevice().getGraphicsIndex() };
+  Surface::Surface(const Instance &instance) : c_instance(instance) {
+    platform_create_window();
+    vk::XcbSurfaceCreateInfoKHR surface_ci { {}, connection, window };
     try {
-      m_cmdPool = c_device.get().createCommandPool(command_pool_ci);
+      m_surface = c_instance.get().createXcbSurfaceKHR(surface_ci);
     }
     catch (vk::SystemError &err) {
-      std::cerr << "lw::CmdPool -> " << err.what() << std::endl;
+      std::cerr << "lw::Surface -> " << err.what() << std::endl;
       throw err;
     }
-    std::cout << "lw::CmdPool :: created successfully" << std::endl;
+    std::cout << "lw::Surface :: created successfully" << std::endl;
   }
 
-  CmdPool::~CmdPool(void) {
-    c_device.get().destroyCommandPool(m_cmdPool);
-    std::cout << "lw::~CmdPool :: destroyed successfully" << std::endl;
+  Surface::~Surface(void) {
+    c_instance.get().destroySurfaceKHR(m_surface);
+    std::cout << "lw::~Surface :: destroyed successfully" << std::endl;
+    platform_destroy_window();
   }
 }
+
+#endif  // __unix__
