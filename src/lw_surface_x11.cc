@@ -23,7 +23,6 @@
 
 #define VK_USE_PLATFORM_XCB_KHR
 
-#include <tuple>
 #include <iostream>
 #include <xcb/xcb.h>
 #include <lw_surface.hh>
