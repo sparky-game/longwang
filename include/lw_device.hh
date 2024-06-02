@@ -28,6 +28,7 @@ namespace lw {
   class Device {
     PhysicalDevice m_physicalDevice;
     vk::Device m_device;
+    std::vector<const char *> m_extensions;
   public:
     Device(const Instance &instance);
     ~Device(void);

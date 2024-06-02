@@ -21,12 +21,18 @@
 
 #pragma once
 
-#include <vector>
+#include <lw_device.hh>
+#include <lw_surface.hh>
+#include <vulkan/vulkan.hpp>
 
 namespace lw {
-  void platform_create_window(void);
-
-  void platform_destroy_window(void);
-
-  void platform_get_required_extensions(std::vector<const char *> &extensions);
+  class Swapchain {
+    const Device &c_device;
+    const Surface &c_surface;
+    vk::SwapchainKHR m_swapchain;
+  public:
+    Swapchain(const Device &device, const Surface &surface);
+    ~Swapchain(void);
+    const vk::SwapchainKHR &get(void) const { return m_swapchain; }
+  };
 }

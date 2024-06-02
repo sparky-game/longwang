@@ -21,12 +21,17 @@
 
 #pragma once
 
-#include <vector>
+#include <ranges>
 
 namespace lw {
-  void platform_create_window(void);
-
-  void platform_destroy_window(void);
-
-  void platform_get_required_extensions(std::vector<const char *> &extensions);
+  static inline auto enumerate(const auto &xs) {
+    return xs | std::views::transform([i = 0](const auto &x) mutable {
+      return std::make_pair(i++, x);
+    });
+  }
+  
+  template <typename T>
+  static inline const T &clamp(const T &x, const T &min, const T &max) {
+    return x < min ? min : x > max ? max : x;
+  }
 }

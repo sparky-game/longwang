@@ -22,6 +22,7 @@
 #include <iostream>
 #include <lw_instance.hh>
 #include <lw_platform.hh>
+#include <lw_swapchain.hh>
 
 static constexpr auto app_name { "Test" };
 static constexpr auto app_version { VK_MAKE_VERSION(0, 1, 0) };

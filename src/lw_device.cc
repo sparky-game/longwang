@@ -21,14 +21,9 @@
 
 #include <ranges>
 #include <iostream>
+#include <lw_utils.hh>
 #include <lw_device.hh>
 #include <lw_physical_device.hh>
-
-static auto enumerate(const auto &es) {
-  return es | std::views::transform([i = 0](const auto &x) mutable {
-    return std::make_pair(i++, x);
-  });
-}
 
 namespace lw {
   Device::Device(const Instance &instance) : m_physicalDevice{instance} {
@@ -42,6 +37,9 @@ namespace lw {
     }
     vk::DeviceQueueCreateInfo device_queue_ci{ {}, m_physicalDevice.getGraphicsIndex(), 1, &queue_priority };
     vk::DeviceCreateInfo device_ci { {}, device_queue_ci };
+    m_extensions.push_back("VK_KHR_swapchain");
+    device_ci.enabledExtensionCount = m_extensions.size();
+    device_ci.ppEnabledExtensionNames = &m_extensions[0];
     try {
       m_device = m_physicalDevice.get().createDevice(device_ci);
     }
