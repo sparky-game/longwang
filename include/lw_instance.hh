@@ -25,11 +25,13 @@
 
 namespace lw {
   class Instance {
+    const std::string &m_name;
     vk::Instance m_instance;
     std::vector<const char *> m_extensions;
   public:
-    Instance(void);
+    Instance(const std::string &name);
     ~Instance(void);
     const vk::Instance &get(void) const { return m_instance; }
+    const std::string &getName(void) const { return m_name; }
   };
 }

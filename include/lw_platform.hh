@@ -24,7 +24,7 @@
 #include <vector>
 
 namespace lw {
-  void platform_create_window(void);
+  void platform_create_window(const uint32_t &win_width, const uint32_t &win_height, const std::string &win_name);
 
   void platform_destroy_window(void);
 

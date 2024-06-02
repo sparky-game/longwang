@@ -32,7 +32,7 @@ namespace lw {
   public:
     Device(const Instance &instance);
     ~Device(void);
-    const PhysicalDevice &getPhysicalDevice(void) const { return m_physicalDevice; }
     const vk::Device &get(void) const { return m_device; }
+    const PhysicalDevice &getPhysicalDevice(void) const { return m_physicalDevice; }
   };
 }

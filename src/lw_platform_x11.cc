@@ -29,28 +29,14 @@
 
 static constexpr auto window_x {0};
 static constexpr auto window_y {0};
-static constexpr auto window_width { 1280 };
-static constexpr auto window_height { 720 };
-static constexpr std::string window_name { "Test" };
 static constexpr std::string wm_protocols_prop_id { "WM_PROTOCOLS" };
 static const std::string wm_delete_protocol_id { "WM_DELETE_WINDOW" };
 
 xcb_connection_t *connection = 0;
 xcb_window_t window = {0};
 
-static inline void window_set_title(void) {
-  xcb_change_property(connection,
-                      XCB_PROP_MODE_REPLACE,
-                      window,
-                      XCB_ATOM_WM_NAME,
-                      XCB_ATOM_STRING,
-                      8,
-                      window_name.size(),
-                      window_name.c_str());
-}
-
 namespace lw {
-  void platform_create_window(void) {
+  void platform_create_window(const uint32_t &width, const uint32_t &height, const std::string &name) {
     Display *display = XOpenDisplay(0);
     connection = XGetXCBConnection(display);
     if (xcb_connection_has_error(connection)) {
@@ -77,14 +63,21 @@ namespace lw {
                       screen->root,
                       window_x,
                       window_y,
-                      window_width,
-                      window_height,
+                      width,
+                      height,
                       0,
                       XCB_WINDOW_CLASS_INPUT_OUTPUT,
                       screen->root_visual,
                       XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK,
                       values);
-    window_set_title();
+    xcb_change_property(connection,
+                        XCB_PROP_MODE_REPLACE,
+                        window,
+                        XCB_ATOM_WM_NAME,
+                        XCB_ATOM_STRING,
+                        8,
+                        name.size(),
+                        name.c_str());
     xcb_intern_atom_cookie_t wm_delete_cookie = xcb_intern_atom(connection,
                                                                 0,
                                                                 wm_delete_protocol_id.size(),

@@ -24,7 +24,6 @@
 #include <lw_platform.hh>
 #include <lw_swapchain.hh>
 
-static constexpr auto app_name { "Test" };
 static constexpr auto app_version { VK_MAKE_VERSION(0, 1, 0) };
 static constexpr auto engine_name { "Longwang" };
 static constexpr auto engine_version { VK_MAKE_VERSION(0, 1, 0) };
@@ -35,8 +34,8 @@ static constexpr auto layer_count { sizeof(layers) / sizeof(layers[0]) };
 #endif
 
 namespace lw {
-  Instance::Instance(void) {
-    vk::ApplicationInfo app_i { app_name, app_version, engine_name, engine_version, api_version };
+  Instance::Instance(const std::string &name) : m_name{name} {
+    vk::ApplicationInfo app_i { m_name.c_str(), app_version, engine_name, engine_version, api_version };
     m_extensions.push_back("VK_KHR_surface");
     platform_get_required_extensions(m_extensions);
     vk::InstanceCreateInfo instance_ci { {}, &app_i, {}, {}, static_cast<uint32_t>(m_extensions.size()), &m_extensions[0] };

@@ -32,8 +32,8 @@ extern xcb_connection_t *connection;
 extern xcb_window_t window;
 
 namespace lw {
-  Surface::Surface(const Instance &instance) : c_instance(instance) {
-    platform_create_window();
+  Surface::Surface(const Instance &instance, const uint32_t &win_width, const uint32_t &win_height) : c_instance{instance}, c_win_width{win_width}, c_win_height{win_height} {
+    platform_create_window(c_win_width, c_win_height, c_instance.getName());
     vk::XcbSurfaceCreateInfoKHR surface_ci { {}, connection, window };
     try {
       m_surface = c_instance.get().createXcbSurfaceKHR(surface_ci);

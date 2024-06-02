@@ -27,10 +27,14 @@
 namespace lw {
   class Surface {
     const Instance &c_instance;
+    const uint32_t &c_win_width;
+    const uint32_t &c_win_height;
     vk::SurfaceKHR m_surface;
   public:
-    Surface(const Instance &instance);
+    Surface(const Instance &instance, const uint32_t &win_width, const uint32_t &win_height);
     ~Surface(void);
     const vk::SurfaceKHR &get(void) const { return m_surface; }
+    const uint32_t &getWidth(void) const { return c_win_width; }
+    const uint32_t &getHeight(void) const { return c_win_height; }
   };
 }
