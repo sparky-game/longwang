@@ -34,5 +34,6 @@ namespace lw {
     ~Device(void);
     const vk::Device &get(void) const { return m_device; }
     const PhysicalDevice &getPhysicalDevice(void) const { return m_physicalDevice; }
+    void wait(void) const { m_device.waitIdle(); }
   };
 }
