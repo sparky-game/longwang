@@ -34,6 +34,6 @@ namespace lw {
       }
     }
     if (!m_physicalDevice) m_physicalDevice = physical_devices.front();
-    std::cout << "lw::PhysicalDevice :: " << m_physicalDevice.getProperties().deviceName << std::endl;
+    std::cout << "lw::PhysicalDevice :: `" << m_physicalDevice.getProperties().deviceName << "`" << std::endl;
   }
 }
