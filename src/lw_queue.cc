@@ -19,20 +19,13 @@
  */
 
 
-#pragma once
-
-#include <lw_device.hh>
-#include <lw_cmd_buf.hh>
-#include <vulkan/vulkan.hpp>
+#include <iostream>
+#include <lw_queue.hh>
 
 namespace lw {
-  class CmdPool {
-    const Device &c_device;
-    vk::CommandPool m_cmdPool;
-  public:
-    CmdPool(const Device &device);
-    ~CmdPool(void);
-    const vk::CommandPool &get(void) const { return m_cmdPool; }
-    CmdBuf alloc(CmdBufType type) const { return CmdBuf{c_device, *this, type}; }
-  };
+  Queue::Queue(const Device &device) : c_device{device} {
+    m_queue = c_device.get().getQueue(c_device.getPhysicalDevice().getGraphicsIndex(), 0);
+    if (not m_queue) throw std::runtime_error{"lw::Queue -> could not obtain handle"};
+    std::cout << "lw::Queue :: obtained successfully" << std::endl;
+  }
 }

@@ -22,17 +22,13 @@
 #pragma once
 
 #include <lw_device.hh>
-#include <lw_cmd_buf.hh>
-#include <vulkan/vulkan.hpp>
 
 namespace lw {
-  class CmdPool {
+  class Queue {
     const Device &c_device;
-    vk::CommandPool m_cmdPool;
+    vk::Queue m_queue;
   public:
-    CmdPool(const Device &device);
-    ~CmdPool(void);
-    const vk::CommandPool &get(void) const { return m_cmdPool; }
-    CmdBuf alloc(CmdBufType type) const { return CmdBuf{c_device, *this, type}; }
+    Queue(const Device &device);
+    const vk::Queue &get(void) const { return m_queue; }
   };
 }
