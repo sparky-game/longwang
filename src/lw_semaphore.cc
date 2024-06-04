@@ -24,7 +24,13 @@
 
 namespace lw {
   Semaphore::Semaphore(const Device &device) : c_device{device} {
-    m_semaphore = c_device.get().createSemaphore({});
+    try {
+      m_semaphore = c_device.get().createSemaphore({});
+    }
+    catch (vk::SystemError &err) {
+      std::cerr << "lw::Semaphore -> " << err.what() << std::endl;
+      throw err;
+    }
     std::cout << "lw::Semaphore :: created successfully" << std::endl;
   }
 
