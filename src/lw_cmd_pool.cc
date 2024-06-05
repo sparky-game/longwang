@@ -39,4 +39,14 @@ namespace lw {
     c_device.get().destroyCommandPool(m_cmdPool);
     std::cout << "lw::~CmdPool :: destroyed successfully" << std::endl;
   }
+
+  void CmdPool::reset(void) const {
+    try {
+      c_device.get().resetCommandPool(m_cmdPool);
+    }
+    catch (vk::SystemError &err) {
+      std::cerr << "lw::CmdPool -> " << err.what() << std::endl;
+      throw err;
+    }
+  }
 }

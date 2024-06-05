@@ -34,6 +34,6 @@ namespace lw {
     ~CmdPool(void);
     const vk::CommandPool &get(void) const { return m_cmdPool; }
     CmdBuf alloc(CmdBufType type) const { return CmdBuf{c_device, *this, type}; }
-    void reset(void) const { c_device.get().resetCommandPool(m_cmdPool); }
+    void reset(void) const;
   };
 }
