@@ -26,7 +26,7 @@
 static constexpr auto buf_alloc_count {1};
 
 namespace lw {
-  CmdBuf::CmdBuf(const Device &device, const CmdPool &cmd_pool, CmdBufType type) : c_device{device}, c_cmdPool{cmd_pool}, c_type{type} {
+  CmdBuf::CmdBuf(const Device &device, const CmdPool &cmd_pool, const CmdBufType &type) : c_device{device}, c_cmdPool{cmd_pool}, c_type{type} {
     vk::CommandBufferAllocateInfo cmd_buf_ai{c_cmdPool.get(),
                                              c_type == CmdBufType::Primary ? vk::CommandBufferLevel::ePrimary : vk::CommandBufferLevel::eSecondary,
                                              buf_alloc_count};
@@ -38,5 +38,26 @@ namespace lw {
       throw err;
     }
     std::cout << "lw::CmdBuf :: allocated successfully" << std::endl;
+  }
+
+  void CmdBuf::begin(const CmdBufUsage &usage) const {
+    vk::CommandBufferUsageFlagBits usage_flag { vk::CommandBufferUsageFlagBits::eOneTimeSubmit };
+    switch (usage) {
+    case CmdBufUsage::OneTimeSubmit:
+      usage_flag = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+      break;
+    case CmdBufUsage::RenderPassContinue:
+      usage_flag = vk::CommandBufferUsageFlagBits::eRenderPassContinue;
+      break;
+    case CmdBufUsage::SimultaneousUse:
+      usage_flag = vk::CommandBufferUsageFlagBits::eSimultaneousUse;
+      break;
+    }
+    vk::CommandBufferBeginInfo cmd_buf_bi { usage_flag };
+    m_cmdBuf.begin(cmd_buf_bi);
+  }
+
+  void CmdBuf::end(void) const {
+    m_cmdBuf.end();
   }
 }

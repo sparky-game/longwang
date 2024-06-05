@@ -32,14 +32,22 @@ namespace lw {
     Secondary
   };
 
+  enum class CmdBufUsage {
+    OneTimeSubmit,
+    RenderPassContinue,
+    SimultaneousUse
+  };
+
   class CmdBuf {
     const Device &c_device;
     const CmdPool &c_cmdPool;
-    const CmdBufType c_type;
+    const CmdBufType &c_type;
     vk::CommandBuffer m_cmdBuf;
   public:
-    CmdBuf(const Device &device, const CmdPool &cmd_pool, CmdBufType type);
+    CmdBuf(const Device &device, const CmdPool &cmd_pool, const CmdBufType &type);
     const vk::CommandBuffer &get(void) const { return m_cmdBuf; }
     const CmdBufType &getType(void) const { return c_type; }
+    void begin(const CmdBufUsage &usage) const;
+    void end(void) const;
   };
 }
