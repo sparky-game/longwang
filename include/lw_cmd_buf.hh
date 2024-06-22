@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <lw_device.hh>
+#include "lw_device.hh"
 #include <vulkan/vulkan.hpp>
 
 namespace lw {

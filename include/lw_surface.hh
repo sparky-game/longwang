@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <lw_instance.hh>
+#include "lw_instance.hh"
 #include <vulkan/vulkan.hpp>
 
 namespace lw {

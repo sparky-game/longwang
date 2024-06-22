@@ -21,17 +21,12 @@
 
 #pragma once
 
-#include "lw_device.hh"
-#include "lw_surface.hh"
-
-namespace lw {
-  class RenderPass {
-    const Device &c_device;
-    const Surface &c_surface;
-    vk::RenderPass m_renderPass;
-  public:
-    RenderPass(const Device &device, const Surface &surface);
-    ~RenderPass(void);
-    const vk::RenderPass &get(void) const { return m_renderPass; }
-  };
-}
+#include "include/lw_queue.hh"
+#include "include/lw_fence.hh"
+#include "include/lw_device.hh"
+#include "include/lw_surface.hh"
+#include "include/lw_instance.hh"
+#include "include/lw_cmd_pool.hh"
+#include "include/lw_swapchain.hh"
+#include "include/lw_semaphore.hh"
+#include "include/lw_render_pass.hh"

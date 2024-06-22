@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <lw_device.hh>
+#include "lw_device.hh"
 
 namespace lw {
   class Fence {

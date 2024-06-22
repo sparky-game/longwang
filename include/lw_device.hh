@@ -22,7 +22,7 @@
 #pragma once
 
 #include <vulkan/vulkan.hpp>
-#include <lw_physical_device.hh>
+#include "lw_physical_device.hh"
 
 namespace lw {
   class Device {

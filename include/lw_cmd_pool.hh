@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include <lw_device.hh>
-#include <lw_cmd_buf.hh>
+#include "lw_device.hh"
+#include "lw_cmd_buf.hh"
 #include <vulkan/vulkan.hpp>
 
 namespace lw {
