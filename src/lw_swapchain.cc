@@ -52,7 +52,7 @@ namespace lw {
                                             vk::ColorSpaceKHR::eSrgbNonlinear,
                                             swapchain_ex,
                                             1,
-                                            vk::ImageUsageFlagBits::eColorAttachment,
+                                            vk::ImageUsageFlagBits::eColorAttachment | vk::ImageUsageFlagBits::eTransferDst,
                                             vk::SharingMode::eExclusive,
                                             {},
                                             pre_transform,
@@ -60,9 +60,7 @@ namespace lw {
                                             vk::PresentModeKHR::eFifo,
                                             true,
                                             nullptr);
-    try {
-      m_swapchain = c_device.get().createSwapchainKHR(swapchain_ci);
-    }
+    try { m_swapchain = c_device.get().createSwapchainKHR(swapchain_ci); }
     catch (vk::SystemError &err) {
       std::cerr << "lw::Swapchain -> " << err.what() << std::endl;
       throw err;

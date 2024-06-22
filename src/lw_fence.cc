@@ -24,9 +24,7 @@
 
 namespace lw {
   Fence::Fence(const Device &device) : c_device{device} {
-    try {
-      m_fence = c_device.get().createFence({});
-    }
+    try { m_fence = c_device.get().createFence({}); }
     catch (vk::SystemError &err) {
       std::cerr << "lw::Fence -> " << err.what() << std::endl;
       throw err;

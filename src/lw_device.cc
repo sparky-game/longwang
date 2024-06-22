@@ -35,7 +35,7 @@ namespace lw {
         break;
       }
     }
-    vk::DeviceQueueCreateInfo device_queue_ci{ {}, m_physicalDevice.getGraphicsIndex(), 1, &queue_priority };
+    vk::DeviceQueueCreateInfo device_queue_ci { {}, m_physicalDevice.getGraphicsIndex(), 1, &queue_priority };
     vk::DeviceCreateInfo device_ci { {}, device_queue_ci };
     m_extensions.push_back("VK_KHR_swapchain");
     device_ci.enabledExtensionCount = m_extensions.size();
